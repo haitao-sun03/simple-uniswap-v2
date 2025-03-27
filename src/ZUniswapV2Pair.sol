@@ -61,13 +61,10 @@ contract ZUniswapV2Pair is ERC20Token {
 
     // caller have been transfer token0 and token1 to the contract before call mint
     function mint() external {
-        // 1 1
         (uint112 _reserve0, uint112 _reserve1,) = getReserves();
-        // 2 2
         uint256 balance0 = IERC20(token0).balanceOf(address(this));
         uint256 balance1 = IERC20(token1).balanceOf(address(this));
 
-        // 1，1
         uint256 amount0 = balance0 - _reserve0;
         uint256 amount1 = balance1 - _reserve1;
 
