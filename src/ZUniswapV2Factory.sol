@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
+import {ZUniswapV2Pair} from "./ZUniswapV2Pair.sol";
 
 contract ZUniswapV2Factory {
 
@@ -12,7 +13,7 @@ contract ZUniswapV2Factory {
         require(tokenA != tokenB, 'UniswapV2: IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
         require(token0 != address(0), 'UniswapV2: ZERO_ADDRESS');
-        require(getPair[token0][token1] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
+        require(pairs[token0][token1] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
 
         address pair = address(new ZUniswapV2Pair{salt:keccak256(abi.encodePacked(token0, token1))}());
         pairs[token0][token1] = pair;
